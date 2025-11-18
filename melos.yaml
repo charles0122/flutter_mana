@@ -1,0 +1,51 @@
+name: flutter_mana
+packages:
+  - packages/**
+  - example
+
+sdkPath: .fvm/flutter_sdk
+
+command:
+  bootstrap:
+    runPubGetInParallel: true
+    usePubspecOverrides: false
+    environment:
+      sdk: ">=3.9.0 <4.0.0"
+      flutter: ">=3.35.0"
+    dependencies:
+      meta: ^1.15.0
+    dev_dependencies:
+      flutter_lints: ^6.0.0
+      dart_code_metrics_presets: ^2.24.0
+      build_runner: ^2.4.9
+  publish:
+    hooks:
+      pre: melos run gen:build
+
+
+categories:
+  flutter_projects: 
+    - example
+    - packages/mana_align_ruler
+    - packages/mana_color_sucker
+    - packages/mana_device_info
+    - packages/mana_dio_inspector
+    - packages/mana_fps_monitor
+    - packages/mana_log_viewer
+    - packages/mana_memory_info
+    - packages/mana_package_info
+    - packages/mana_screen_info
+    - packages/mana_shared_preferences_viewer
+    - packages/mana_show_code
+    - packages/mana_touch_indicator
+    - packages/mana_visual_helper
+    - packages/mana_widget_info_inspector
+
+
+
+scripts:
+  analyze:
+    run: melos run analyze:dart
+    description: Run all static analysis checks.
+    exec:
+      failFast: true

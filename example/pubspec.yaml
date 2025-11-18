@@ -1,0 +1,45 @@
+name: example
+description: "Flutter Mana Example"
+publish_to: 'none'
+version: 1.3.0+1
+
+environment:
+  sdk: ">=3.7.0 <4.0.0"
+  flutter: ">=3.29.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  dio: ^5.9.0
+  logger: ^2.6.2
+  shared_preferences: ^2.5.3
+  flutter_mana: any
+  mana_align_ruler: any
+  mana_color_sucker: any
+  mana_device_info: any
+  mana_dio_inspector: any
+  mana_fps_monitor: any
+  mana_grid: any
+  mana_license: any
+  mana_log_viewer: any
+  mana_memory_info: any
+  mana_package_info: any
+  mana_screen_info: any
+  mana_shared_preferences_viewer: any
+  mana_show_code: any
+  mana_touch_indicator: any
+  mana_visual_helper: any
+  mana_widget_info_inspector: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/test.jpeg
+
