@@ -1,6 +1,6 @@
 # 1.4.0
 
-- fix: [issues#29](https://github.com/lhlyu/flutter_mana/issues/29)
+- fix: [issues#29](https://github.com/charles0122/flutter_mana/issues/29)
 - style: dart format
 
 # 1.3.0

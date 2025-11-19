@@ -1,0 +1,23 @@
+name: Melos Release Prepare
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release_prepare:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - uses: bluefireteam/melos-action@v3
+        with:
+          run-bootstrap: true
+          run-versioning: true
+          publish-dry-run: true
+          include-private: false
+          create-pr: true

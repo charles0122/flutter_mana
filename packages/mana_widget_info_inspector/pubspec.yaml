@@ -1,8 +1,8 @@
 name: mana_widget_info_inspector
 description: "Mana Widget Info Inspector plugin"
-version: 1.4.0
-homepage: https://github.com/lhlyu/flutter_mana
-repository: https://github.com/lhlyu/flutter_mana
+version: 1.0.0
+homepage: https://github.com/charles0122/flutter_mana
+repository: https://github.com/charles0122/flutter_mana
 
 environment:
   sdk: ">=3.7.0 <4.0.0"
@@ -12,14 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_mana: ^1.4.0
-  dio: ^5.9.0
-  logger: ^2.6.2
-  shared_preferences: ^2.5.3
-  device_info_plus: ^12.2.0
-  package_info_plus: ^9.0.0
-  vm_service: ^15.0.2
-  string_scanner: ^1.4.1
+  flutter_mana: ^1.0.0
 
 dev_dependencies:
   flutter_test:

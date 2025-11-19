@@ -60,7 +60,7 @@ void main(List<String> args) {
 
   print('\n**********************************************************************\n');
   print(
-      '[$pluginChineseName - $pascal](https://github.com/lhlyu/flutter_mana/tree/master/packages/kits/lib/src/plugins/mana_$snake)');
+      '[$pluginChineseName - $pascal](https://github.com/charles0122/flutter_mana/tree/master/packages/kits/lib/src/plugins/mana_$snake)');
   print('\n**********************************************************************');
 }
 

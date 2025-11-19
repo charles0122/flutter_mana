@@ -1,0 +1,19 @@
+name: Melos Verify
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - uses: bluefireteam/melos-action@v3
+        with:
+          run-bootstrap: true
+          publish-dry-run: true
+          include-private: false

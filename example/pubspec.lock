@@ -121,7 +121,7 @@ packages:
       path: "../packages/mana"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -202,112 +202,112 @@ packages:
       path: "../packages/mana_align_ruler"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_color_sucker:
     dependency: "direct main"
     description:
       path: "../packages/mana_color_sucker"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_device_info:
     dependency: "direct main"
     description:
       path: "../packages/mana_device_info"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_dio_inspector:
     dependency: "direct main"
     description:
       path: "../packages/mana_dio_inspector"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_fps_monitor:
     dependency: "direct main"
     description:
       path: "../packages/mana_fps_monitor"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_grid:
     dependency: "direct main"
     description:
       path: "../packages/mana_grid"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_license:
     dependency: "direct main"
     description:
       path: "../packages/mana_license"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_log_viewer:
     dependency: "direct main"
     description:
       path: "../packages/mana_log_viewer"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_memory_info:
     dependency: "direct main"
     description:
       path: "../packages/mana_memory_info"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_package_info:
     dependency: "direct main"
     description:
       path: "../packages/mana_package_info"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_screen_info:
     dependency: "direct main"
     description:
       path: "../packages/mana_screen_info"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_shared_preferences_viewer:
     dependency: "direct main"
     description:
       path: "../packages/mana_shared_preferences_viewer"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_show_code:
     dependency: "direct main"
     description:
       path: "../packages/mana_show_code"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_touch_indicator:
     dependency: "direct main"
     description:
       path: "../packages/mana_touch_indicator"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_visual_helper:
     dependency: "direct main"
     description:
       path: "../packages/mana_visual_helper"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   mana_widget_info_inspector:
     dependency: "direct main"
     description:
       path: "../packages/mana_widget_info_inspector"
       relative: true
     source: path
-    version: "1.4.0"
+    version: "1.0.0"
   matcher:
     dependency: transitive
     description:
