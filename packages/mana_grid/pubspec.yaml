@@ -3,7 +3,7 @@ description: "Mana Grid plugin"
 version: 1.0.0
 homepage: https://github.com/charles0122/flutter_mana
 repository: https://github.com/charles0122/flutter_mana
-
+resolution: workspace
 environment:
   sdk: ">=3.7.0 <4.0.0"
   flutter: ">=3.29.0"

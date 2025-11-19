@@ -6,7 +6,7 @@ repository: https://github.com/charles0122/flutter_mana
 documentation: https://github.com/charles0122/flutter_mana
 issue_tracker: https://github.com/charles0122/flutter_mana/issues
 topics: [ debug, in-app-debug, diagnostics, plugin ]
-
+resolution: workspace
 environment:
   sdk: ">=3.7.0 <4.0.0"
   flutter: ">=3.29.0"
