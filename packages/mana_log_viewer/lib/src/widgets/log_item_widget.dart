@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 import 'package:logger/logger.dart';
 
 const Map<Level, Color> _levelColorMap = {

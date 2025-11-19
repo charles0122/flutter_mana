@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'package:event_bus/event_bus.dart';
+import 'package:mana/mana.dart';
+
+import 'package:mana_database/mana_database.dart';
+import 'package:mana_eventbus_trigger/mana_eventbus_trigger.dart';
+import 'package:mana_stream_viewer/mana_stream_viewer.dart';
 
 import 'detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mana/flutter_mana.dart';
 import 'package:mana_align_ruler/mana_align_ruler.dart';
 import 'package:mana_color_sucker/mana_color_sucker.dart';
 import 'package:mana_device_info/mana_device_info.dart';
@@ -27,7 +32,11 @@ import 'utils/sp_client.dart';
 import 'widgets/animated_ball.dart';
 import 'widgets/custom_button.dart';
 
+final demoBus = ManaInstrumentedEventBus(EventBus());
+
 void main() async {
+  EventBusDefaultAdapter.forBus(demoBus.bus);
+
   ManaPluginManager.instance
     ..register(ManaScreenInfo())
     ..register(ManaTouchIndicator())
@@ -40,6 +49,9 @@ void main() async {
     ..register(ManaLogViewer())
     ..register(ManaDeviceInfo())
     ..register(ManaColorSucker())
+    ..register(ManaDatabase())
+    ..register(ManaEventbusTrigger(bus: demoBus.bus))
+    ..register(ManaStreamViewer())
     ..register(ManaDioInspector())
     ..register(ManaWidgetInfoInspector())
     ..register(ManaFpsMonitor())
@@ -107,6 +119,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   @override
+  void initState() {
+    super.initState();
+    demoBus.on<_DemoEvent>().listen((e) {
+      debugPrint('received: ${e.name} ${e.payload}');
+    });
+    demoBus.on<_DemoEvent2>().listen((e) {
+      debugPrint('received: ${e.name} ${e.num}');
+    });
+  }
+
+  void fireDemoEvent() {
+    demoBus.fire(_DemoEvent('order.created', DateTime.now().toIso8601String()));
+  }
+
+  void fireDemoEvent2() {
+    demoBus.fire(_DemoEvent2('order.created', 123));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -151,6 +182,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 backgroundColor: Colors.deepPurple,
                 onPressed: addSharedPreferences,
               ),
+              CustomButton(
+                text: 'Fire Demo Event',
+                backgroundColor: Colors.green,
+                onPressed: fireDemoEvent,
+              ),
+              CustomButton(
+                text: 'Fire Demo Event 2',
+                backgroundColor: Colors.pink,
+                onPressed: fireDemoEvent2,
+              ),
               Container(
                 width: double.infinity,
                 color: Colors.grey.shade200,
@@ -168,4 +209,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
   }
+}
+
+class _DemoEvent {
+  final String name;
+  final String payload;
+  _DemoEvent(this.name, this.payload);
+}
+
+class _DemoEvent2 {
+  final String name;
+  final int num;
+  _DemoEvent2(this.name, this.num);
 }

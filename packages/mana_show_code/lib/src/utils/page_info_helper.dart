@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 
 import 'code_display_service.dart';
 

@@ -34,7 +34,7 @@ flutter pub add flutter_mana_kits
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 import 'package:flutter_mana_kits/flutter_mana_kits.dart';
 
 
@@ -133,7 +133,7 @@ flutter pub add flutter_mana
 ```dart
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 
 /// png to base64
 const _iconData =

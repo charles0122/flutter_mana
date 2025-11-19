@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 
 import 'icon.dart';
 import 'widgets/show_code.dart';

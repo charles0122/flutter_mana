@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../../flutter_mana.dart';
+import '../../../mana.dart';
 
 // 左右最小留边
 const double _minMarginH = 10;

@@ -1,4 +1,5 @@
 name: example
+resolution: workspace
 description: "Flutter Mana Example"
 publish_to: 'none'
 version: 1.0.0
@@ -15,7 +16,7 @@ dependencies:
   dio: ^5.9.0
   logger: ^2.6.2
   shared_preferences: ^2.5.3
-  flutter_mana: any
+  mana: any
   mana_align_ruler: any
   mana_color_sucker: any
   mana_device_info: any
@@ -32,6 +33,10 @@ dependencies:
   mana_touch_indicator: any
   mana_visual_helper: any
   mana_widget_info_inspector: any
+  mana_stream_viewer: any
+  mana_eventbus_trigger: any
+  mana_database: any
+  event_bus: ^2.0.0
 
 dev_dependencies:
   flutter_test:

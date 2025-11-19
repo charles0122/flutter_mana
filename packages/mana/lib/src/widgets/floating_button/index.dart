@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../flutter_mana.dart';
+import '../../../mana.dart';
 
 import 'controller.dart';
 import 'icon.dart';

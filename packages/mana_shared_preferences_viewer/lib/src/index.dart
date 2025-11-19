@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 import 'package:mana_shared_preferences_viewer/src/widgets/shared_preferences_viewer.dart';
 
 import 'icon.dart';

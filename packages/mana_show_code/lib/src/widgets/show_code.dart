@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 
 import 'show_code_content.dart';
 

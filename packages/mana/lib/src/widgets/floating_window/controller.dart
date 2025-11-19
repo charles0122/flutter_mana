@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../../flutter_mana.dart';
+import '../../../mana.dart';
 
 class FloatingWindowController extends ChangeNotifier {
   FloatingWindowController(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 
 import 'color_sucker_barrier.dart';
 import 'color_sucker_content.dart';

@@ -1,4 +1,4 @@
-import '../../flutter_mana.dart';
+import '../../mana.dart';
 
 mixin ManaI18n {
   static const _strings = {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../flutter_mana.dart';
+import '../../mana.dart';
 
 import 'floating_button/index.dart';
 import 'mana_panel.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 import 'package:vm_service/vm_service.dart';
 
 /// `CodeDisplayService` 类利用 `VMvmInspector` 提供的服务，

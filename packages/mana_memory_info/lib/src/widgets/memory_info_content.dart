@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../utils/memory_service.dart';

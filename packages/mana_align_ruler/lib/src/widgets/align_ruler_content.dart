@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mana/flutter_mana.dart';
+import 'package:mana/mana.dart';
 
 class AlignRulerContent extends StatelessWidget with I18nMixin {
   final Offset dotPosition;
@@ -29,8 +29,14 @@ class AlignRulerContent extends StatelessWidget with I18nMixin {
     return Column(
       spacing: 4,
       children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Left: $left'), Text('Top: $top')]),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text('Right: $right'), Text('Bottom: $bottom')]),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text('Left: $left'), Text('Top: $top')],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text('Right: $right'), Text('Bottom: $bottom')],
+        ),
       ],
     );
   }
@@ -58,7 +64,11 @@ class AlignRulerContent extends StatelessWidget with I18nMixin {
                 Expanded(
                   child: Text(
                     t('align_ruler.tip'),
-                    style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 12),
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
                 Switch(

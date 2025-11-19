@@ -1,5 +1,5 @@
 import 'package:flutter/rendering.dart';
-import '../../flutter_mana.dart';
+import '../../mana.dart';
 
 /// A utility class for performing hit testing on the Flutter render tree.
 ///

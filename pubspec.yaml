@@ -1,15 +1,18 @@
-name: mana
+name: _
 publish_to: none
 environment:
   sdk: ">=3.7.0 <4.0.0"
   flutter: ">=3.29.0"
 
 workspace:
+  - example
   - packages/mana
   - packages/mana_align_ruler
   - packages/mana_color_sucker
+  - packages/mana_database
   - packages/mana_device_info
   - packages/mana_dio_inspector
+  - packages/mana_eventbus_trigger
   - packages/mana_fps_monitor
   - packages/mana_grid
   - packages/mana_license
@@ -19,6 +22,7 @@ workspace:
   - packages/mana_screen_info
   - packages/mana_shared_preferences_viewer
   - packages/mana_show_code
+  - packages/mana_stream_viewer
   - packages/mana_touch_indicator
   - packages/mana_visual_helper
   - packages/mana_widget_info_inspector
@@ -30,5 +34,5 @@ dependencies:
 dev_dependencies:
   melos: ^7.3.0
 
-melos:
-  useRootAsPackage: true
+# melos:
+#   useRootAsPackage: true

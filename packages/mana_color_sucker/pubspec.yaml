@@ -14,7 +14,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_mana: ^1.0.0
+  mana: ^1.0.0
 
 dev_dependencies:
   flutter_test:

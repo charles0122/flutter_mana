@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../flutter_mana.dart';
+import '../../mana.dart';
 
 import '../core/mana_i18n_mixin.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../flutter_mana.dart';
+import '../../mana.dart';
 
 /// A widget that displays a grid of available Mana plugins, allowing users to select and trigger them.
 ///
