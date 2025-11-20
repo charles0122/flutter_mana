@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:event_bus/event_bus.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mana/mana.dart';
 
 import 'package:mana_database/mana_database.dart';
@@ -32,10 +33,80 @@ import 'utils/sp_client.dart';
 import 'widgets/animated_ball.dart';
 import 'widgets/custom_button.dart';
 
+part 'main.g.dart';
+
 final demoBus = ManaInstrumentedEventBus(EventBus());
+
+@HiveType(typeId: 0)
+class Person with UMEHiveData {
+  @HiveField(0)
+  final int age;
+  @HiveField(1)
+  final String name;
+
+  Person({required this.age, required this.name});
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {"age": age, "name": name};
+  }
+}
 
 void main() async {
   EventBusDefaultAdapter.forBus(demoBus.bus);
+
+  var sqldb = SqliteDatabase(
+    'test.db',
+    path: null,
+    isDeleteDB: true,
+    onCreate: (db, index) {
+      db.execute(
+        'create table test (table_name text,table_size integer,tid integer,tid1 integer,tid2 integer)',
+      );
+      db.execute('create table people (name text,age integer)');
+      db.insert('people', {
+        "name": "zhangzhangzhangzhangzhangzhangzhangzhangzhangzhangzhang",
+        "age": 12,
+      });
+      db.insert('people', {
+        "name":
+            "zhazhangzhangzhangzhangzhangzhangzhangzhangzhangzhangzhangzhangng",
+        "age": 12,
+      });
+      db.insert('people', {
+        "name": "zhzhangzhangzhangzhangzhangzhangzhangzhangzhangzhangzhangang",
+        "age": 12,
+      });
+      db.insert('test', {
+        "table_name": "zhang",
+        "table_size": 12,
+        'tid': 1,
+        'tid1': 1,
+        'tid2': 1,
+      });
+      db.insert('test', {"table_name": "zhang", "table_size": 12, "tid": 2});
+    },
+    updateMap: [
+      {
+        'test': SqliteUpdateConditions(
+          updateNeedWhere: 'tid = ?',
+          updateNeedColumnKey: ['tid'],
+        ),
+      },
+    ],
+  );
+
+  ///register hive databases
+  await Hive.initFlutter();
+  Hive.registerAdapter(PersonAdapter());
+  var pBox = await Hive.openBox<Person>("people");
+  pBox.put("p", Person(age: 12, name: 'xiaolaing'));
+  pBox.put("p1", Person(age: 13, name: 'xiaolaing'));
+  pBox.put("p1", Person(age: 13, name: 'xiaolaing'));
+  pBox.put("p2", Person(age: 14, name: 'xiaolaing'));
+
+  ///reigster dugeg plugin
+  var hive = HiveDatabase([HiveBoxItem<Person>(name: 'people', box: pBox)]);
 
   ManaPluginManager.instance
     ..register(ManaScreenInfo())
@@ -49,7 +120,7 @@ void main() async {
     ..register(ManaLogViewer())
     ..register(ManaDeviceInfo())
     ..register(ManaColorSucker())
-    ..register(ManaDatabase())
+    ..register(ManaDatabase(databases: [hive, sqldb]))
     ..register(ManaEventbusTrigger(bus: demoBus.bus))
     ..register(ManaStreamViewer())
     ..register(ManaDioInspector())

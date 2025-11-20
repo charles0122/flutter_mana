@@ -36,12 +36,18 @@ dependencies:
   mana_stream_viewer: any
   mana_eventbus_trigger: any
   mana_database: any
-  event_bus: ^2.0.0
+  event_bus: any
+  # sqflite: any
+  # shared_preferences: ^2.0.13
+  hive: any
+  hive_flutter: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  hive_generator: any
+  build_runner: ^2.1.0 
 
 flutter:
   uses-material-design: true
