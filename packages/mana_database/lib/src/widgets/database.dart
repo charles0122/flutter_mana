@@ -691,12 +691,7 @@ class _DatabasePanelState extends State<DatabasePanel>
 
           return Padding(
             padding: const EdgeInsets.all(8),
-            child: RefreshIndicator.adaptive(
-              onRefresh: () async {
-                await _updateTableSelect(
-                  _controller.tableDatas[_controller.currentTableIndex],
-                );
-              },
+            child: ExcludeSemantics(
               child: TableView.builder(
                 style: TableViewStyle(
                   dividers: TableViewDividersStyle(
@@ -729,7 +724,7 @@ class _DatabasePanelState extends State<DatabasePanel>
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
                         border: Border(bottom: Divider.createBorderSide(ctx)),
-                      ),
+                      ), 
                       child: Row(
                         children: [
                           Expanded(
@@ -930,7 +925,7 @@ class _DatabasePanelState extends State<DatabasePanel>
                         child: Text(data, overflow: TextOverflow.ellipsis),
                       );
                     }
-
+ 
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6.0),
                       child: Text(
@@ -945,7 +940,7 @@ class _DatabasePanelState extends State<DatabasePanel>
                   var rowContent = contentBuilder(context, cellBuilder);
                   final selectedRow = selection.contains(row);
                   return KeyedSubtree(
-                    key: ValueKey(row),
+                    key: ObjectKey(_controller.datas[row]),
                     child: DecoratedBox(
                       position: DecorationPosition.foreground,
                       decoration: BoxDecoration(
@@ -962,8 +957,7 @@ class _DatabasePanelState extends State<DatabasePanel>
                               selection.add(row);
                             });
                           },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
+                          child: Container(
                             color: Theme.of(context)
                                 .colorScheme
                                 .primaryContainer
@@ -991,6 +985,14 @@ class _DatabasePanelState extends State<DatabasePanel>
                       _controller.datas.insert(newIndex, moved);
                     });
                   },
+                ),
+                bodyContainerBuilder: (context, body) => RefreshIndicator.adaptive(
+                  onRefresh: () async {
+                    await _updateTableSelect(
+                      _controller.tableDatas[_controller.currentTableIndex],
+                    );
+                  },
+                  child: body,
                 ),
               ),
             ),

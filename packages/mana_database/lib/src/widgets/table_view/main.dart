@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:mana_database/src/widgets/table_view/global_target_platform.dart';
 import 'package:mana_database/src/widgets/table_view/stateful_random_background.dart';
 import 'package:mana_database/src/widgets/table_view/style_controls.dart';
-import 'package:material_table_view/default_animated_switcher_transition_builder.dart';
 import 'package:material_table_view/material_table_view.dart';
 import 'package:material_table_view/shimmer_placeholder_shade.dart';
 import 'package:material_table_view/sliver_table_view.dart';
@@ -118,7 +117,7 @@ class _DemoPageState extends State<DemoPage>
       width: 56.0,
       freezePriority: 1 * (_columnsPowerOfTwo + 1),
       sticky: true,
-    ),
+    ), 
     for (var i = 1; i <= 1 << _columnsPowerOfTwo; i++)
       _DemoTableColumn(
         index: i,
@@ -561,11 +560,7 @@ class _DemoPageState extends State<DemoPage>
                 ? Border(bottom: Divider.createBorderSide(context))
                 : null,
       ),
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
-        transitionBuilder: tableRowDefaultAnimatedSwitcherTransitionBuilder,
-        child: child,
-      ),
+      child: child,
     ),
   );
 
