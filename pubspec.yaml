@@ -17,6 +17,7 @@ workspace:
   - packages/mana_grid
   - packages/mana_license
   - packages/mana_log_viewer
+  - packages/mana_memory_detector
   - packages/mana_memory_info
   - packages/mana_package_info
   - packages/mana_screen_info
@@ -24,12 +25,16 @@ workspace:
   - packages/mana_show_code
   - packages/mana_stream_viewer
   - packages/mana_touch_indicator
+  - packages/mana_channel_monitor
+  - packages/mana_channel_observer
   - packages/mana_visual_helper
   - packages/mana_widget_info_inspector
 
 dependencies:
   flutter:
     sdk: flutter
+
+
 
 dev_dependencies:
   melos: ^7.3.0

@@ -1,0 +1,24 @@
+name: mana_memory_detector
+resolution: workspace
+description: "Mana Memory Detector plugin"
+version: 1.0.0
+homepage: https://github.com/charles0122/flutter_mana
+repository: https://github.com/charles0122/flutter_mana
+
+environment:
+  sdk: ">=3.7.0 <4.0.0"
+  flutter: ">=3.29.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_mana: any
+
+  vm_service: ^15.0.0
+  path: ^1.8.0
+  sqflite: ^2.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0

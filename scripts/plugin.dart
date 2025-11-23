@@ -7,6 +7,9 @@ const files = {
   'mana_{{SNAKE_CASE}}/lib/src/index.dart': _indexContent,
   'mana_{{SNAKE_CASE}}/lib/src/widgets/{{SNAKE_CASE}}.dart': _widgetContent,
   'mana_{{SNAKE_CASE}}/lib/mana_{{SNAKE_CASE}}.dart': _libraryExportContent,
+  'mana_{{SNAKE_CASE}}/README.md': _readmeContent,
+  'mana_{{SNAKE_CASE}}/CHANGELOG.md': _changelogContent,
+  'mana_{{SNAKE_CASE}}/LICENSE': _licenseContent,
   'mana_{{SNAKE_CASE}}/pubspec.yaml': _pubspecContent,
 };
 
@@ -53,6 +56,7 @@ void main(List<String> args) {
     'PASCAL_CASE': pascal,
     'SPACE_PASCAL_CASE': spacePascal,
     'ZH_NAME': pluginChineseName,
+    'YEAR': DateTime.now().year.toString(),
   };
 
   files.forEach((templatePath, content) {
@@ -75,7 +79,7 @@ void main(List<String> args) {
     '\n**********************************************************************\n',
   );
   print(
-    '[${pluginChineseName} - $pascal](https://github.com/lhlyu/flutter_mana/tree/master/packages/mana_$snake)',
+    '[${pluginChineseName} - $pascal](https://github.com/charles0122/flutter_mana/tree/master/packages/mana_$snake)',
   );
   print(
     '\n**********************************************************************',
@@ -124,6 +128,63 @@ export 'src/index.dart';
 export 'src/icon.dart';
 ''';
 
+const _readmeContent = '''# Mana {{SPACE_PASCAL_CASE}}
+
+{{ZH_NAME}}
+
+## 安装
+
+在项目的 `pubspec.yaml` 中添加依赖：
+
+```yaml
+dependencies:
+  mana_{{SNAKE_CASE}}: any
+```
+
+## 使用
+
+```dart
+import 'package:mana_{{SNAKE_CASE}}/mana_{{SNAKE_CASE}}.dart';
+
+// 作为 Mana 插件使用（示例）
+final plugin = Mana{{PASCAL_CASE}}();
+```
+
+## 说明
+
+该插件为 Mana 平台的 {{SPACE_PASCAL_CASE}} 功能模块。
+''';
+
+const _changelogContent = '''# Changelog
+
+## 1.0.0
+
+- Initial release of Mana {{SPACE_PASCAL_CASE}} plugin.
+''';
+
+const _licenseContent = '''MIT License
+
+Copyright (c) {{YEAR}} flutter_mana contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+''';
+
 const _widgetContent = '''import 'package:flutter/material.dart';
 import 'package:mana/mana.dart';
 
@@ -146,8 +207,8 @@ const _pubspecContent = '''name: mana_{{SNAKE_CASE}}
 resolution: workspace
 description: "Mana {{SPACE_PASCAL_CASE}} plugin"
 version: 1.0.0
-homepage: https://github.com/lhlyu/flutter_mana
-repository: https://github.com/lhlyu/flutter_mana
+homepage: https://github.com/charles0122/flutter_mana
+repository: https://github.com/charles0122/flutter_mana
 
 environment:
   sdk: ">=3.7.0 <4.0.0"
