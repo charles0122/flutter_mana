@@ -724,7 +724,7 @@ class _DatabasePanelState extends State<DatabasePanel>
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
                         border: Border(bottom: Divider.createBorderSide(ctx)),
-                      ), 
+                      ),
                       child: Row(
                         children: [
                           Expanded(
@@ -925,7 +925,7 @@ class _DatabasePanelState extends State<DatabasePanel>
                         child: Text(data, overflow: TextOverflow.ellipsis),
                       );
                     }
- 
+
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 6.0),
                       child: Text(
@@ -986,14 +986,15 @@ class _DatabasePanelState extends State<DatabasePanel>
                     });
                   },
                 ),
-                bodyContainerBuilder: (context, body) => RefreshIndicator.adaptive(
-                  onRefresh: () async {
-                    await _updateTableSelect(
-                      _controller.tableDatas[_controller.currentTableIndex],
-                    );
-                  },
-                  child: body,
-                ),
+                bodyContainerBuilder:
+                    (context, body) => RefreshIndicator.adaptive(
+                      onRefresh: () async {
+                        await _updateTableSelect(
+                          _controller.tableDatas[_controller.currentTableIndex],
+                        );
+                      },
+                      child: body,
+                    ),
               ),
             ),
           );
