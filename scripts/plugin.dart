@@ -217,7 +217,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_mana: any
+  mana: any
 
 dev_dependencies:
   flutter_test:
