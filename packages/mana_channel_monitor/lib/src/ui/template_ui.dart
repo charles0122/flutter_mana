@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@Deprecated('弃用：请使用 ChannelMonitorPages')
 class TemplatePageWidget extends StatelessWidget {
   /// 页面模板，提供统一标题/返回/内容区域布局
   final String title;
@@ -69,6 +70,7 @@ class TemplatePageWidget extends StatelessWidget {
   }
 }
 
+@Deprecated('弃用：请使用 ChannelMonitorPages')
 class TemplateItemWidget extends StatelessWidget {
   /// 列表项模板，统一交互与样式
   final String title;

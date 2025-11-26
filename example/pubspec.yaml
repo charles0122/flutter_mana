@@ -19,6 +19,8 @@ dependencies:
   mana: any
   mana_align_ruler: any
   mana_color_sucker: any
+  mana_channel_observer: any
+  mana_channel_monitor: any
   mana_device_info: any
   mana_dio_inspector: any
   mana_fps_monitor: any

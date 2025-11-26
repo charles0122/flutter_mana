@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:event_bus/event_bus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mana/mana.dart';
+import 'package:mana_channel_monitor/mana_channel_monitor.dart';
+import 'package:mana_channel_observer/mana_channel_observer.dart';
 
 import 'package:mana_database/mana_database.dart';
 import 'package:mana_eventbus_trigger/mana_eventbus_trigger.dart';
@@ -10,6 +12,7 @@ import 'package:mana_stream_viewer/mana_stream_viewer.dart';
 import 'detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mana_align_ruler/mana_align_ruler.dart';
 import 'package:mana_color_sucker/mana_color_sucker.dart';
 import 'package:mana_device_info/mana_device_info.dart';
@@ -53,6 +56,7 @@ class Person with UMEHiveData {
 }
 
 void main() async {
+  ChannelMonitorBinding.ensureInitialized();
   EventBusDefaultAdapter.forBus(demoBus.bus);
 
   var sqldb = SqliteDatabase(
@@ -113,6 +117,8 @@ void main() async {
     ..register(ManaTouchIndicator())
     ..register(ManaVisualHelper())
     ..register(ManaGrid())
+    ..register(ManaChannelMonitor())
+    ..register(ManaChannelObserver())
     ..register(ManaLicense())
     ..register(ManaPackageInfo())
     ..register(ManaMemoryInfo())
@@ -159,6 +165,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool isLandscape = false;
+  bool nativeStreamEnabled = false;
+  bool handlersRegistered = false;
+  final EventChannel _nativeStreamChannel = EventChannel('mana/demo/stream');
+  StreamSubscription<dynamic>? _nativeStreamSub;
+  final BasicMessageChannel<String> _lifecycleChannel =
+      const BasicMessageChannel('mana/demo/lifecycle', StringCodec());
+  final BasicMessageChannel<dynamic> _keyboardChannel =
+      const BasicMessageChannel('mana/demo/keyboard', JSONMessageCodec());
 
   void toggleOrientation() {
     if (isLandscape) {
@@ -189,6 +203,59 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     await SpClient.insertRandom();
   }
 
+  Future<void> sendLifecycle(String state) async {
+    await SystemChannels.lifecycle.send(state);
+  }
+
+  void toggleNativeStream() {
+    final bool isMobile =
+        !kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.android ||
+            defaultTargetPlatform == TargetPlatform.iOS);
+    if (!isMobile) {
+      debugPrint('native stream not supported on this platform');
+      return;
+    }
+    if (!nativeStreamEnabled) {
+      _nativeStreamSub = _nativeStreamChannel.receiveBroadcastStream().listen(
+        (e) => debugPrint('native stream: $e'),
+      );
+    } else {
+      try {
+        _nativeStreamSub?.cancel();
+      } catch (e) {
+        debugPrint('cancel native stream error: $e');
+      }
+      _nativeStreamSub = null;
+    }
+    setState(() {
+      nativeStreamEnabled = !nativeStreamEnabled;
+    });
+  }
+
+  void registerNativeMessageHandlers() {
+    if (handlersRegistered) return;
+    _lifecycleChannel.setMessageHandler((message) async {
+      debugPrint('native lifecycle: $message');
+      return Future.value('');
+    });
+    _keyboardChannel.setMessageHandler((message) async {
+      debugPrint('native keyboard: $message');
+      return Future.value({});
+    });
+    setState(() {
+      handlersRegistered = true;
+    });
+  }
+
+  Future<void> sendDemoLifecycleFromFlutter() async {
+    await _lifecycleChannel.send('resumed');
+  }
+
+  Future<void> sendDemoKeyboardFromFlutter() async {
+    await _keyboardChannel.send({'type': 'keyup'});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -198,6 +265,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     demoBus.on<_DemoEvent2>().listen((e) {
       debugPrint('received: ${e.name} ${e.num}');
     });
+  }
+
+  @override
+  void dispose() {
+    _nativeStreamSub?.cancel();
+    super.dispose();
   }
 
   void fireDemoEvent() {
@@ -252,6 +325,42 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 text: 'Add SharedPreferences',
                 backgroundColor: Colors.deepPurple,
                 onPressed: addSharedPreferences,
+              ),
+              CustomButton(
+                text: 'Lifecycle Resumed',
+                backgroundColor: Colors.teal,
+                onPressed: () => sendLifecycle('resumed'),
+              ),
+              CustomButton(
+                text: 'Lifecycle Paused',
+                backgroundColor: Colors.tealAccent,
+                onPressed: () => sendLifecycle('paused'),
+              ),
+              CustomButton(
+                text:
+                    nativeStreamEnabled
+                        ? 'Stop Native Stream'
+                        : 'Start Native Stream',
+                backgroundColor: Colors.indigo,
+                onPressed: toggleNativeStream,
+              ),
+              CustomButton(
+                text:
+                    handlersRegistered
+                        ? 'Handlers Registered'
+                        : 'Register Message Handlers',
+                backgroundColor: Colors.grey,
+                onPressed: registerNativeMessageHandlers,
+              ),
+              CustomButton(
+                text: 'Send Demo Lifecycle (F→N)',
+                backgroundColor: Colors.brown,
+                onPressed: sendDemoLifecycleFromFlutter,
+              ),
+              CustomButton(
+                text: 'Send Demo Keyboard (F→N)',
+                backgroundColor: Colors.lightGreen,
+                onPressed: sendDemoKeyboardFromFlutter,
               ),
               CustomButton(
                 text: 'Fire Demo Event',

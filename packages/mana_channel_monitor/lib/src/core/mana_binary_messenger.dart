@@ -4,40 +4,36 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:mana_channel_monitor/src/core/channel_controller.dart';
+import 'package:mana_channel_monitor/src/core/channel_store.dart';
 
-// 在默认 BinaryMessenger 的基础上增加数据监控
+/// 在默认 BinaryMessenger 的基础上增加通道数据监控
 class ChannelMonitorBinaryMessenger extends BinaryMessenger {
   static ChannelMonitorBinaryMessenger binaryMessenger =
       ChannelMonitorBinaryMessenger._();
 
   ChannelMonitorBinaryMessenger._();
 
+  /// 转发平台消息（不记录响应以避免重复）
   @override
   Future<void> handlePlatformMessage(
     String channel,
     ByteData? data,
     ui.PlatformMessageResponseCallback? callback,
   ) async {
-    DateTime now = DateTime.now();
     ui.channelBuffers.push(channel, data, (ByteData? data) {
       if (callback != null) {
         callback(data);
       }
-      channelTracker.trackChannelEvent(
-        channel,
-        now,
-        false,
-        data: data,
-        callback: callback,
-      );
+      // 可选：响应载荷通常为 null，不必重复记录
       // print(
       //     '\n handlePlatformMessage: channel: $channel \n  data:${data.toString()} \n');
     });
   }
 
+  /// 发送平台消息并在收到回复后生成一次记录
   @override
   Future<ByteData?>? send(String channel, ByteData? message) {
-    DateTime now = DateTime.now();
+    final DateTime start = DateTime.now();
     final Completer<ByteData?> completer = Completer<ByteData?>();
     // ui.PlatformDispatcher.instance is accessed directly instead of using
     // ServicesBinding.instance.platformDispatcher because this method might be
@@ -52,6 +48,15 @@ class ChannelMonitorBinaryMessenger extends BinaryMessenger {
       ByteData? reply,
     ) {
       try {
+        final Duration duration = DateTime.now().difference(start);
+        final record = channelTracker.buildRecordFromPair(
+          channel,
+          start,
+          duration,
+          message,
+          reply,
+        );
+        channelStore.saveChannelInfo(record);
         completer.complete(reply);
       } catch (exception, stack) {
         FlutterError.reportError(
@@ -66,14 +71,13 @@ class ChannelMonitorBinaryMessenger extends BinaryMessenger {
         );
       }
     });
-    channelTracker.trackChannelEvent(channel, now, true, data: message);
     // print('\n send \n channel: $channel \n message: ${message.toString()} \n}');
     return completer.future;
   }
 
+  /// 设置消息处理器，处理完成后记录一次入站事件
   @override
   void setMessageHandler(String channel, MessageHandler? handler) {
-    DateTime now = DateTime.now();
     if (handler == null) {
       ui.channelBuffers.clearListener(channel);
     } else {
@@ -81,6 +85,7 @@ class ChannelMonitorBinaryMessenger extends BinaryMessenger {
         ByteData? data,
         ui.PlatformMessageResponseCallback callback,
       ) async {
+        final DateTime start = DateTime.now();
         ByteData? response;
         try {
           response = await handler(data);
@@ -95,11 +100,18 @@ class ChannelMonitorBinaryMessenger extends BinaryMessenger {
           );
         } finally {
           callback(response);
+          try {
+            // 在 handler 完成后记录一次入站事件，duration 通过 sendTime 与当前时间差得到
+            channelTracker.trackChannelEvent(
+              channel,
+              start,
+              false,
+              data: data,
+              callback: callback,
+            );
+          } catch (_) {}
         }
       });
     }
-    channelTracker.trackChannelEvent(channel, now, false, handler: handler);
-    // print(
-    //     '\n setMessageHandler \n channel: $channel \n handler: ${handler.toString()} \n');
   }
 }

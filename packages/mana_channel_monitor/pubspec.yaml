@@ -1,7 +1,7 @@
 name: mana_channel_monitor
 resolution: workspace
 description: "Mana Channel Monitor plugin"
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/charles0122/flutter_mana
 repository: https://github.com/charles0122/flutter_mana
 
